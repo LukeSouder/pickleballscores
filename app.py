@@ -62,3 +62,5 @@ Reset_button = tk.Button(window, text = "Reset Game", command=Reset_game, width=
 Reset_button.pack(pady=10)
 # Start the GUI event loop
 window.mainloop()
+
+
