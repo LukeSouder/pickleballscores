@@ -40,7 +40,8 @@ def Team2button():
         #Reset_game()
 
 def Reset_game():
-    global Server, Team1, Team2
+    global Server, Team1, Team2, Team
+    Team = 1
     Server = 2
     Team1 = 0
     Team2 = 0
