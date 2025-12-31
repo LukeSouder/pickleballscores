@@ -5,6 +5,7 @@ Server = 2
 Team1 = 0
 Team2 = 0
 
+
 def update_label():
     label.config(text=f"{Team1} - {Team2}  |  Server: {Server}")
 
@@ -47,7 +48,7 @@ window = tk.Tk()
 window.title("Score Tracker")
 
 # Add a label
-label = tk.Label(window, text="Score", font=("Helvetica", 16))
+label = tk.Label(window, text="0 - 0 | Server: 2", font=("Helvetica", 16))
 label.pack(pady=10)
 
 # Add buttons
