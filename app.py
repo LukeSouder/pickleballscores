@@ -1,43 +1,47 @@
 import tkinter as tk
 
 # Global variables
+Team = 1
 Server = 2
 Team1 = 0
 Team2 = 0
 
 
 def update_label():
-    label.config(text=f"{Team1} - {Team2}  |  Server: {Server}")
+    label.config(text=f"{Team1} - {Team2}  |  Team: {Team} Server: {Server}")
 
 def Team1button():
-    global Server, Team1, Team2
-    if Server == 1 or Server == 2:
+    global Server, Team1, Team2, Team
+    if Team == 1:
         Team1 += 1
-    if Server == 3:
-        Server = 4
+    if Team == 2 and Server == 1:
+        Server = 2
     else:
-        if Server == 4:
+        if Team == 2 and Server == 2:
             Server = 1
+            Team = 1
     update_label()
     if Team1 >= 11 and Team1 - Team2 >= 2:	
         label.config(text=f"Team1 wins! {Team1} - {Team2}")
         #Reset_game()
 def Team2button():
-    global Server, Team1, Team2
-    if Server == 3 or Server == 4:
+    global Server, Team1, Team2, Team
+    if Team ==  2:
         Team2 += 1
-    if Server == 1:
+    if Team == 1 and Server == 1:
         Server = 2
     else:
-        if Server == 2:
-            Server = 3
+        if Team == 1 and Server == 2:
+            Server = 1
+            Team = 2
     update_label()
     if Team2 >= 11 and Team2 - Team1 >= 2:	
         label.config(text=f"Team2 wins! {Team2} - {Team1}")
         #Reset_game()
 
 def Reset_game():
-    global Server, Team1, Team2
+    global Server, Team1, Team2, Team
+    Team = 1
     Server = 2
     Team1 = 0
     Team2 = 0
@@ -48,7 +52,7 @@ window = tk.Tk()
 window.title("Score Tracker")
 
 # Add a label
-label = tk.Label(window, text="0 - 0 | Server: 2", font=("Helvetica", 16))
+label = tk.Label(window, text="0 - 0 | Team: 1 Server: 2", font=("Helvetica", 16))
 label.pack(pady=10)
 
 # Add buttons
