@@ -1,51 +1,32 @@
 import tkinter as tk
-import enum as Enum 
+from team_states import *
 
 # Global variables
-team = 1
-server = 2
-team1 = 0
-team2 = 0
+current_state = Team1Server2(0,0)
 
 def update_label():
-    label.config(text=f"{team1} - {team2}  |  Team: {team} Server: {server}")
+    label.config(text=f"{current_state.team1} - {current_state.team2}  |  Team: {current_state.team} Server: {current_state.server}")
 
 def team1_button():
-    global server, team1, team2, team
-    if team == 1:
-        team1 += 1
-    if team == 2 and server == 1:
-        server = 2
-    else:
-        if team == 2 and server == 2:
-            server = 1
-            team = 1
+    global  current_state
+    
+    current_state = current_state.team1_scored()
     update_label()
-    if team1 >= 11 and team1 - team2 >= 2:	
-        label.config(text=f"Team1 wins! {team1} - {team2}")
+    if current_state.team1 >= 11 and current_state.team1 - current_state.team2 >= 2:	
+        label.config(text=f"Team1 wins! {current_state.team1} - {current_state.team2}")
         #Reset_game()
 
 def team2_button():
-    global server, team1, team2, team
-    if team ==  2:
-        team2 += 1
-    if team == 1 and server == 1:
-        server = 2
-    else:
-        if team == 1 and server == 2:
-            server = 1
-            team = 2
+    global current_state
+    current_state = current_state.team2_scored()
     update_label()
-    if team2 >= 11 and team2 - team1 >= 2:	
-        label.config(text=f"Team2 wins! {team2} - {team1}")
+    if current_state.team2 >= 11 and current_state.team2 - current_state.team1 >= 2:	
+        label.config(text=f"Team2 wins! {current_state.team2} - {current_state.team1}")
         #Reset_game()
 
 def reset_game():
-    global server, team1, team2, team
-    team = 1
-    server = 2
-    team1 = 0
-    team2 = 0
+    global current_state
+    current_state = Team1Server2(0,0)
     update_label() 
 
 # Create main window
