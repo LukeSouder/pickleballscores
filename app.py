@@ -4,30 +4,32 @@ from team_states import *
 # Global variables
 current_state = Team1Server2(0,0)
 
-def update_label():
+def winner(is_winner, opponent):
+    if is_winner >= 11 and is_winner - opponent >= 2:	
+        label.config(text=f"Team1 wins! {is_winner} - {opponent}")
+
+def update_label(label):
     label.config(text=f"{current_state.team1} - {current_state.team2}  |  Team: {current_state.team} Server: {current_state.server}")
 
 def team1_button():
     global  current_state
     
     current_state = current_state.team1_scored()
-    update_label()
-    if current_state.team1 >= 11 and current_state.team1 - current_state.team2 >= 2:	
-        label.config(text=f"Team1 wins! {current_state.team1} - {current_state.team2}")
+    update_label(label)
+    winner(current_state.team1, current_state.team2)
         #Reset_game()
 
 def team2_button():
     global current_state
     current_state = current_state.team2_scored()
-    update_label()
-    if current_state.team2 >= 11 and current_state.team2 - current_state.team1 >= 2:	
-        label.config(text=f"Team2 wins! {current_state.team2} - {current_state.team1}")
+    update_label(label)
+    winner(current_state.team2, current_state.team1)
         #Reset_game()
 
 def reset_game():
     global current_state
     current_state = Team1Server2(0,0)
-    update_label() 
+    update_label(label) 
 
 # Create main window
 window = tk.Tk()
