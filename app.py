@@ -4,26 +4,25 @@ from team_states import *
 # Global variables
 current_state = Team1Server2(0,0)
 
-def winner(is_winner, opponent, team_number):
-    if is_winner >= 11 and is_winner - opponent >= 2:	
-        label.config(text=f"Team {team_number} wins! {is_winner} - {opponent}")
-
 def update_label(label):
-    label.config(text=f"{current_state.team1} - {current_state.team2}  |  Team: {current_state.team} Server: {current_state.server}")
+    if current_state.winner() == 1:
+        label.config(text=f"Team {current_state.team} wins! {current_state.team1} - {current_state.team2}")
+    if current_state.winner() == 2:
+        label.config(text=f"Team {current_state.team} wins! {current_state.team2} - {current_state.team1}")
+    if current_state.winner() == 0:
+        label.config(text=f"{current_state.team1} - {current_state.team2}  |  Team: {current_state.team} Server: {current_state.server}")
 
 def team1_button():
     global  current_state
     
     current_state = current_state.team1_scored()
     update_label(label)
-    winner(current_state.team1, current_state.team2, current_state.team)
         #Reset_game()
 
 def team2_button():
     global current_state
     current_state = current_state.team2_scored()
     update_label(label)
-    winner(current_state.team2, current_state.team1, current_state.team)
         #Reset_game()
 
 def reset_game():
