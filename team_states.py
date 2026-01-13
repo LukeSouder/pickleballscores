@@ -1,8 +1,20 @@
 
-class Team1Server1:
-    def __init__(self, team1: int, team2: int):
+
+class Teams:
+    def __init__(self, team1, team2):
         self.team1 = team1
         self.team2 = team2
+
+    def winner(self):
+        if self.team1 >= 11 and self.team1 - self.team2 >= 2:
+            return 1
+        if self.team2 >= 11 and self.team2 - self.team1 >= 2:
+            return 2
+        return 0
+
+class Team1Server1(Teams):
+    def __init__(self, team1: int, team2: int):
+        super().__init__(team1, team2)
         self.team = 1
         self.server = 1
 
@@ -12,10 +24,9 @@ class Team1Server1:
     def team2_scored(self):
         return Team1Server2(self.team1, self.team2)
 
-class Team1Server2:
+class Team1Server2(Teams):
     def __init__(self, team1: int, team2: int):
-        self.team1 = team1
-        self.team2 = team2
+        super().__init__(team1, team2)
         self.team = 1
         self.server = 2
 
@@ -25,10 +36,9 @@ class Team1Server2:
     def team2_scored(self):
         return Team2Server1(self.team1, self.team2)
     
-class Team2Server1:
+class Team2Server1(Teams):
     def __init__(self, team1: int, team2: int):
-        self.team1 = team1
-        self.team2 = team2
+        super().__init__(team1, team2)
         self.team = 2
         self.server = 1
 
@@ -38,12 +48,12 @@ class Team2Server1:
     def team2_scored(self):
         return Team2Server1(self.team1, self.team2 + 1)
     
-class Team2Server2:
+class Team2Server2(Teams):
     def __init__(self, team1: int, team2: int):
-        self.team1 = team1
-        self.team2 = team2
+        super().__init__(team1, team2)
         self.team = 2
         self.server = 2
+   
     def team1_scored(self):
         return Team1Server1(self.team1, self.team2)
     
