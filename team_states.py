@@ -1,7 +1,16 @@
+
+
 class Teams:
     def __init__(self, team1, team2):
         self.team1 = team1
         self.team2 = team2
+
+    def winner(self):
+        if self.team1 >= 11 and self.team1 - self.team2 >= 2:
+            return 1
+        if self.team2 >= 11 and self.team2 - self.team1 >= 2:
+            return 2
+        return 0
 
 class Team1Server1(Teams):
     def __init__(self, team1: int, team2: int):
